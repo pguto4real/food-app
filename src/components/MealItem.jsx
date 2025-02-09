@@ -4,9 +4,11 @@ import Button from "./UI/Button";
 import CartContext from "../store/CartContext";
 
 const MealItem = ({ meal }) => {
-//   const { addItem } = useContext(CartContext);
+  const { addItem } = useContext(CartContext);
 
-//   function handleAddMealToCart() {}
+  function handleAddMealToCart() {
+    addItem(meal);
+  }
 
   return (
     <li className="meal-item">
