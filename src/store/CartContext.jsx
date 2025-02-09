@@ -59,12 +59,12 @@ export function CartContextProvider({ children }) {
     items: [],
   });
 
-//   function addItem(item) {
-//     dispatchCartAction({ type: "ADD_ITEM", item });
-//   }
-//   function removeItem(id) {
-//     dispatchCartAction({ type: "REMOVE_ITEM", id });
-//   }
+  function addItem(item) {
+    dispatchCartAction({ type: "ADD_ITEM", item });
+  }
+  function removeItem(id) {
+    dispatchCartAction({ type: "REMOVE_ITEM", id });
+  }
 
   const cartContext = {
     items: cartState.items,
