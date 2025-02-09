@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Meals = () => {
   const [loadedMeals, setLoadedMeals] = useState([]);
   async function fetchMeals() {
-    const response = await fetch("http://localhost:3000/opinions");
+    const response = await fetch("http://localhost:3000/meals");
 
     if (!response.ok) {
       return;
@@ -12,7 +12,9 @@ const Meals = () => {
     const mealsData = await response.json();
     setLoadedMeals(mealsData);
   }
-
+  useEffect(() => {
+    fetchMeals();
+  }, []);
   return (
     <ul id="meals">
       {loadedMeals.map((loadedMeal) => (
