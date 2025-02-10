@@ -14,6 +14,7 @@ const Cart = () => {
   function handleHideCart() {
     hideCart();
   }
+  const cartQuantity = items.length;
   const cartTotal = items.reduce((totalPrice, item) => {
     return totalPrice + item.quantity * item.price;
   }, 0);
@@ -35,7 +36,7 @@ const Cart = () => {
         <Button textOnly onClick={handleHideCart}>
           Close
         </Button>
-        <Button>Go to checkout</Button>
+        {cartQuantity > 0 && <Button>Go to checkout</Button>}
       </p>
     </Modal>
   );
