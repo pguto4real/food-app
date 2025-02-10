@@ -8,13 +8,13 @@ import UserProgressContext from "../store/UserProgressContext";
 
 const Checkout = () => {
   const { items, cartTotal } = useContext(CartContext);
-  const { progress, hideCart } = useContext(UserProgressContext);
+  const { progress, hideCheckout } = useContext(UserProgressContext);
 
-  function handleHideCart() {
-    hideCart();
+  function handleHideCheckout() {
+    hideCheckout();
   }
   return (
-    <Modal open={progress === "checkout"}>
+    <Modal open={progress === "checkout"} onClose={handleHideCheckout}>
       <form action="">
         <h2>Checkout</h2>
         <p>Total Amount:{currencyFormatter.format(cartTotal)} </p>
@@ -26,7 +26,7 @@ const Checkout = () => {
           <Input label="City" type="text" id={"city"} />
         </div>
         <p className="modal-actions">
-          <Button textOnly onClick={handleHideCart}>
+          <Button textOnly onClick={handleHideCheckout}>
             Close
           </Button>
           <Button>Submit Order</Button>

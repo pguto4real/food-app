@@ -9,7 +9,7 @@ import CartItem from "./CartItem";
 
 const Cart = () => {
   const { items, cartTotal, addItem, removeItem } = useContext(CartContext);
-  const { progress, hideCart,showCheckout } = useContext(UserProgressContext);
+  const { progress, hideCart, showCheckout } = useContext(UserProgressContext);
 
   function handleHideCart() {
     hideCart();
@@ -20,7 +20,7 @@ const Cart = () => {
   const cartQuantity = items.length;
 
   return (
-    <Modal className="cart" open={progress === "cart"}>
+    <Modal className="cart" open={progress === "cart"} onClose={handleHideCart}>
       <h2>Your Cart</h2>
       <ul>
         {items.map((item) => (
@@ -37,7 +37,9 @@ const Cart = () => {
         <Button textOnly onClick={handleHideCart}>
           Close
         </Button>
-        {cartQuantity > 0 && <Button onClick={handleShowCheckout}>Go to checkout</Button>}
+        {cartQuantity > 0 && (
+          <Button onClick={handleShowCheckout}>Go to checkout</Button>
+        )}
       </p>
     </Modal>
   );
