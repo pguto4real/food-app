@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useContext } from "react";
+import CartContext from "../store/CartContext";
 
 const Checkout = () => {
-  return (
-    <div>Checkout</div>
-  )
-}
+  const { items } = useContext(CartContext);
 
-export default Checkout
+  const cartTotal = items.reduce((totalPrice, item) => {
+    return totalPrice + item.quantity * item.price;
+  }, 0);
+  return (
+    <form action="">
+      <h2>Checkout</h2>
+      <P>Total Amount: </P>
+    </form>
+  );
+};
+
+export default Checkout;

@@ -2,11 +2,14 @@ import { act, createContext, useReducer } from "react";
 
 const CartContext = createContext({
   items: [],
+  cartTotal: 0,
   addItem: (item) => {},
   removeItem: (id) => {},
 });
 function cartReducer(state, action) {
+   
   if (action.type === "ADD_ITEM") {
+   
     const extistingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
@@ -24,9 +27,14 @@ function cartReducer(state, action) {
       updatedItems.push({ ...action.item, quantity: 1 });
     }
 
+    const cartTotal = updatedItems.reduce((totalPrice, item) => {
+      return totalPrice + item.quantity * item.price;
+    }, 0);
+    
     return {
       ...state,
       items: updatedItems,
+      cartTotal: cartTotal,
     };
   }
 
@@ -46,9 +54,14 @@ function cartReducer(state, action) {
       };
       updatedItems[extistingCartItemIndex] = updatedItem;
     }
+
+    const cartTotal = updatedItems.reduce((totalPrice, item) => {
+      return totalPrice + item.quantity * item.price;
+    }, 0);
     return {
       ...state,
       items: updatedItems,
+      cartTotal: cartTotal,
     };
   }
 
@@ -68,10 +81,11 @@ export function CartContextProvider({ children }) {
 
   const cartContext = {
     items: cartState.items,
+    cartTotal: cartState.cartTotal?cartState.cartTotal:0,
     addItem,
     removeItem,
   };
-//   console.log(cartContext)
+  
   return <CartContext value={cartContext}>{children}</CartContext>;
 }
 

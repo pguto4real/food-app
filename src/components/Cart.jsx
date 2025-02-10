@@ -8,16 +8,14 @@ import UserProgressContext from "../store/UserProgressContext";
 import CartItem from "./CartItem";
 
 const Cart = () => {
-  const { items, addItem, removeItem } = useContext(CartContext);
+  const { items, cartTotal, addItem, removeItem } = useContext(CartContext);
   const { progress, hideCart } = useContext(UserProgressContext);
 
   function handleHideCart() {
     hideCart();
   }
   const cartQuantity = items.length;
-  const cartTotal = items.reduce((totalPrice, item) => {
-    return totalPrice + item.quantity * item.price;
-  }, 0);
+
   return (
     <Modal className="cart" open={progress === "cart"}>
       <h2>Your Cart</h2>
