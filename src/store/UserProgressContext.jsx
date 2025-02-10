@@ -10,10 +10,12 @@ const UserProgressContext = createContext({
 
 export function UserProgressContextProvider({ children }) {
   const [userProgress, setUserProgress] = useState("");
-  function showcart() {
+  function showCart() {
     setUserProgress("cart");
   }
-
+  function hideCart() {
+    setUserProgress("");
+  }
   return (
     <UserProgressContext value={UserProgressContext}>
       {children}
