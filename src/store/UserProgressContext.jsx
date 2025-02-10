@@ -1,0 +1,20 @@
+import { createContext, useState } from "react";
+
+const UserProgressContext = createContext({
+  progress: "",
+  shorCart: () => {},
+  hideCart: () => {},
+  showChechkout: () => {},
+  hideChechkout: () => {},
+});
+
+export function UserProgressContextProvider({ children }) {
+
+    const [userProgress,setUserProgress]=useState('')
+  return (
+    <UserProgressContext value={UserProgressContext}>
+      {children}
+    </UserProgressContext>
+  );
+}
+export default UserProgressContext;
