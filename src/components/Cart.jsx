@@ -8,7 +8,7 @@ import UserProgressContext from "../store/UserProgressContext";
 import CartItem from "./CartItem";
 
 const Cart = () => {
-  const { items } = useContext(CartContext);
+  const { items, addItem, removeItem } = useContext(CartContext);
   const { progress, hideCart } = useContext(UserProgressContext);
 
   function handleHideCart() {
@@ -22,14 +22,16 @@ const Cart = () => {
       <h2>Your Cart</h2>
       <ul>
         {items.map((item) => (
-          <CartItem item={item} />
-          //   <li key={item.id}>
-          //     {item.name} - {item.quantity} -{item.price}
-          //   </li>
+          <CartItem
+            key={item.id}
+            item={item}
+            onIncrease={() => addItem(item)}
+            onDecrease={() => removeItem(item.id)}
+          />
         ))}
       </ul>
       <p className="cart-total">{currencyFormatter.format(cartTotal)}</p>
-      <p className="modal-action">
+      <p className="modal-actions">
         <Button textOnly onClick={handleHideCart}>
           Close
         </Button>
