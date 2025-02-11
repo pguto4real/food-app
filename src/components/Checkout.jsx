@@ -33,13 +33,10 @@ const Checkout = () => {
     clearData();
     hideCheckout();
   }
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const fd = new FormData(event.target);
+  async function checkoutAction(event) {
     const customerData = Object.fromEntries(fd.entries());
 
-    sendRequest(
+    await sendRequest(
       JSON.stringify({
         order: {
           items,
@@ -91,7 +88,7 @@ const Checkout = () => {
   }
   return (
     <Modal open={progress === "checkout"} onClose={handleHideCheckout}>
-      <form onSubmit={handleSubmit}>
+      <form action={checkoutAction}>
         <h2>Checkout</h2>
         <p>Total Amount:{currencyFormatter.format(cartTotal)} </p>
         <Input label="Full Name" type="text" id={"name"} />
