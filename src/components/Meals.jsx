@@ -8,7 +8,7 @@ const Meals = () => {
     fetchedData: loadedMeals,
     isFetching,
     error,
-  } = useHttp("http://localhost:3000/meals", requestConfig, []);
+  } = useHttp("http://localhost:3000/meals", requestConfig, [],'meal');
 
   if (isFetching) {
     return (

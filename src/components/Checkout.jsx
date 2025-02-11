@@ -22,8 +22,8 @@ const Checkout = () => {
     isFetching: isSending,
     error,
     sendRequest,
-  } = useHttp("http://localhost:3000/orders", requestConfig, []);
-
+  } = useHttp("http://localhost:3000/orders", requestConfig, {},'checkout');
+  console.log(fetchedData)
   function handleHideCheckout() {
     hideCheckout();
   }
@@ -66,6 +66,18 @@ const Checkout = () => {
   );
   if (isSending) {
     actions = <span>Sending order data...</span>;
+  }
+
+  if (Object.keys(fetchedData).length !== 0 && !error) {
+    return (
+      <Modal open={progress === "checkout"} onClose={handleHideCheckout}>
+        <h2>Success!</h2>
+        <p>Your order was submitted successfully</p>
+        <p>
+          <Button onClick={handleHideCheckout}>Close</Button>
+        </p>
+      </Modal>
+    );
   }
   return (
     <Modal open={progress === "checkout"} onClose={handleHideCheckout}>
