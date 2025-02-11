@@ -12,14 +12,16 @@ async function sendHttpRequest(url, config) {
   return resData;
 }
 
-export function useHttp(url, config, initialValue,fntn) {
+export function useHttp(url, config, initialValue, fntn) {
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState();
   const [fetchedData, setFetchedData] = useState(initialValue);
-
+  function clearData() {
+    setFetchedData(initialValue);
+  }
   const sendRequest = useCallback(
     async function sendRequest(data) {
-        // console.log(fntn)
+      // console.log(fntn)
       setIsFetching(true);
       try {
         const resData = await sendHttpRequest(url, { ...config, body: data });
@@ -37,12 +39,13 @@ export function useHttp(url, config, initialValue,fntn) {
       sendRequest();
     }
   }, [sendRequest, config]);
-// console.log(error)
+  // console.log(error)
   return {
     isFetching,
     fetchedData,
     error,
     setFetchedData,
     sendRequest,
+    clearData,
   };
 }
