@@ -16,11 +16,12 @@ const Checkout = () => {
   const { items, cartTotal } = useContext(CartContext);
   const { progress, hideCheckout } = useContext(UserProgressContext);
 
-  const { fetchedData, isFetching, error, sendRequest } = useHttp(
-    "http://localhost:3000/meals",
-    requestConfig,
-    []
-  );
+  const {
+    fetchedData,
+    isFetching: isSending,
+    error,
+    sendRequest,
+  } = useHttp("http://localhost:3000/orders", requestConfig, []);
 
   function handleHideCheckout() {
     hideCheckout();
@@ -40,6 +41,7 @@ const Checkout = () => {
       })
     );
 
+   
     // const response = await fetch("http://localhost:3000/orders", {
     //   method: "POST",
     //   body: JSON.stringify({
@@ -52,6 +54,18 @@ const Checkout = () => {
     //     "Content-Type": "application/json",
     //   },
     // });
+  }
+
+  let actions = (
+    <>
+      <Button textOnly onClick={handleHideCheckout}>
+        Close
+      </Button>
+      <Button>Submit Order</Button>
+    </>
+  );
+  if (isSending) {
+    actions = <span>Sending order data...</span>;
   }
   return (
     <Modal open={progress === "checkout"} onClose={handleHideCheckout}>
@@ -66,10 +80,7 @@ const Checkout = () => {
           <Input label="City" type="text" id={"city"} />
         </div>
         <p className="modal-actions">
-          <Button textOnly onClick={handleHideCheckout}>
-            Close
-          </Button>
-          <Button>Submit Order</Button>
+            {actions}
         </p>
       </form>
     </Modal>
