@@ -45,18 +45,6 @@ const Checkout = () => {
       })
     );
 
-    // const response = await fetch("http://localhost:3000/orders", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     order: {
-    //       items,
-    //       customer: customerData,
-    //     },
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
   }
 
   const [formState, formAction, isSending] = useActionState(checkoutAction,null);

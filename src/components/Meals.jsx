@@ -8,14 +8,10 @@ const Meals = () => {
     fetchedData: loadedMeals,
     isFetching,
     error,
-  } = useHttp("http://localhost:3000/meals", requestConfig, [],'meal');
+  } = useHttp("http://localhost:3000/meals", requestConfig, [], "meal");
 
   if (isFetching) {
-    return (
-      <p p className="center">
-        Fetching meals...
-      </p>
-    );
+    return <p className="center">Fetching meals...</p>;
   }
   if (error) {
     return <Error title={"Failed to fetch meals"} message={error} />;
