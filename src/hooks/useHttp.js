@@ -18,10 +18,10 @@ export function useHttp(url, config, initialValue) {
   const [fetchedData, setFetchedData] = useState(initialValue);
 
   const sendRequest = useCallback(
-    async function sendRequest() {
+    async function sendRequest(data) {
       setIsFetching(true);
       try {
-        const resData = await sendHttpRequest(url, config);
+        const resData = await sendHttpRequest(url, { ...config, body: data });
         setFetchedData(resData);
       } catch (error) {
         setError(error.message || "Failed to fetch user places.");
@@ -42,5 +42,6 @@ export function useHttp(url, config, initialValue) {
     fetchedData,
     error,
     setFetchedData,
+    sendRequest,
   };
 }

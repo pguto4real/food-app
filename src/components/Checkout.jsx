@@ -5,10 +5,22 @@ import Input from "./UI/Input";
 import Button from "./UI/Button";
 import Modal from "./Modal";
 import UserProgressContext from "../store/UserProgressContext";
-
+import { useHttp } from "../hooks/useHttp";
+const requestConfig = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 const Checkout = () => {
   const { items, cartTotal } = useContext(CartContext);
   const { progress, hideCheckout } = useContext(UserProgressContext);
+
+  const { fetchedData, isFetching, error, sendRequest } = useHttp(
+    "http://localhost:3000/meals",
+    requestConfig,
+    []
+  );
 
   function handleHideCheckout() {
     hideCheckout();
@@ -19,18 +31,27 @@ const Checkout = () => {
     const fd = new FormData(event.target);
     const customerData = Object.fromEntries(fd.entries());
 
-    const response = await fetch("http://localhost:3000/orders", {
-      method: "POST",
-      body: JSON.stringify({
+    sendRequest(
+      JSON.stringify({
         order: {
           items,
           customer: customerData,
         },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+      })
+    );
+
+    // const response = await fetch("http://localhost:3000/orders", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     order: {
+    //       items,
+    //       customer: customerData,
+    //     },
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
   }
   return (
     <Modal open={progress === "checkout"} onClose={handleHideCheckout}>
