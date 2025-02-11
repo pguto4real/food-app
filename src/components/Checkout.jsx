@@ -6,6 +6,7 @@ import Button from "./UI/Button";
 import Modal from "./Modal";
 import UserProgressContext from "../store/UserProgressContext";
 import { useHttp } from "../hooks/useHttp";
+import Error from "./Error";
 const requestConfig = {
   method: "POST",
   headers: {
@@ -41,7 +42,6 @@ const Checkout = () => {
       })
     );
 
-   
     // const response = await fetch("http://localhost:3000/orders", {
     //   method: "POST",
     //   body: JSON.stringify({
@@ -79,9 +79,8 @@ const Checkout = () => {
           <Input label="Postal Code" type="text" id={"postal-code"} />
           <Input label="City" type="text" id={"city"} />
         </div>
-        <p className="modal-actions">
-            {actions}
-        </p>
+        {error && <Error title={"Failed to submit order"} message={error} />}
+        <p className="modal-actions">{actions}</p>
       </form>
     </Modal>
   );
