@@ -26,7 +26,7 @@ const Meals = () => {
 //   console.log(loadedMeals);
 
 if(isFetching){
-    return <p>Fetching meals...</p>
+    return <p p className="center">Fetching meals...</p>
 }
   return (
     <ul id="meals">
