@@ -23,7 +23,7 @@ const Checkout = () => {
     error,
     sendRequest,
   } = useHttp("http://localhost:3000/orders", requestConfig, {},'checkout');
-  console.log(fetchedData)
+
   function handleHideCheckout() {
     hideCheckout();
   }
@@ -73,8 +73,9 @@ const Checkout = () => {
       <Modal open={progress === "checkout"} onClose={handleHideCheckout}>
         <h2>Success!</h2>
         <p>Your order was submitted successfully</p>
+        <p>We will get back to you with more details via emailwithin the next few minutes</p>
         <p>
-          <Button onClick={handleHideCheckout}>Close</Button>
+          <Button onClick={handleHideCheckout}>Okay</Button>
         </p>
       </Modal>
     );
