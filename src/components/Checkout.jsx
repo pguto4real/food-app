@@ -14,7 +14,7 @@ const requestConfig = {
   },
 };
 const Checkout = () => {
-  const { items, cartTotal } = useContext(CartContext);
+  const { items, cartTotal,clearCart } = useContext(CartContext);
   const { progress, hideCheckout } = useContext(UserProgressContext);
 
   const {
@@ -25,6 +25,10 @@ const Checkout = () => {
   } = useHttp("http://localhost:3000/orders", requestConfig, {},'checkout');
 
   function handleHideCheckout() {
+    hideCheckout();
+  }
+  function handleFinish() {
+    clearCart();
     hideCheckout();
   }
   async function handleSubmit(event) {
@@ -75,7 +79,7 @@ const Checkout = () => {
         <p>Your order was submitted successfully</p>
         <p>We will get back to you with more details via emailwithin the next few minutes</p>
         <p>
-          <Button onClick={handleHideCheckout}>Okay</Button>
+          <Button onClick={handleFinish}>Okay</Button>
         </p>
       </Modal>
     );
