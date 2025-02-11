@@ -32,10 +32,10 @@ export function useHttp(url, config, initialValue) {
   );
 
   useEffect(() => {
-    if (config && (config.method === "GET" || !config.method)) {
+    if ((config && (config.method === "GET" || !config.method)) || !config) {
       sendRequest();
     }
-  }, []);
+  }, [sendRequest, config]);
 
   return {
     isFetching,
