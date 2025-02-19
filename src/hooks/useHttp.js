@@ -38,7 +38,7 @@ export function useHttp(url, config, initialValue, fntn) {
       sendRequest();
     }
   }, [sendRequest, config]);
-  // console.log(error)
+
   return {
     isFetching,
     fetchedData,
