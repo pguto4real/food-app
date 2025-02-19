@@ -21,7 +21,6 @@ export function useHttp(url, config, initialValue, fntn) {
   }
   const sendRequest = useCallback(
     async function sendRequest(data) {
-      // console.log(fntn)
       setIsFetching(true);
       try {
         const resData = await sendHttpRequest(url, { ...config, body: data });
