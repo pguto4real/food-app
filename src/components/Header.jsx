@@ -9,9 +9,7 @@ const Header = () => {
   const { showCart } = useContext(UserProgressContext);
 
   const cartQuantity = items.length;
-  const totalCartItems = items.reduce((totalNumbersOfItems, item) => {
-    return totalNumbersOfItems + item.quantity;
-  }, 0);
+
 
   function handleShowCart() {
     showCart();
